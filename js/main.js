@@ -62,7 +62,19 @@ const container = document.getElementById('container');
 //ciclo gli elementi della pagina
 
 posts.forEach(element => {
-    
+    //destutturazione
+    const {id, content, media, author, likes, created} = element;
+    console.log('scrivo id ', id);
+    console.log('scrivo content ', content);
+    console.log('scrivo media ', media);
+    console.log('scrivo autore ', author);
+    console.log('scrivo likes ', likes);
+    console.log('scrivo created ', created);
+    //destrutturazuone secondaria
+    const {name, image} = author;
+    console.log('scrivo nome ', name);
+    console.log('scrivo image ', image);
+
     const post = 
     `
     <div class="post">
@@ -101,8 +113,10 @@ container.innerHTML += post;
 
 //bottone like
 const arrayButtonLike = document.getElementsByClassName('like-button');
-
 console.log(arrayButtonLike);
+
+//prendo i counter per strada 2
+const arrayCounter = document.querySelectorAll('.js-likes-counter');
 
 const arrayPostLiked = [];
 
@@ -146,9 +160,6 @@ for (let i = 0; i < arrayButtonLike.length; i++) {
 */
 
     //strada 2
-
-    //prendo i counter
-    const arrayCounter = document.querySelectorAll('.js-likes-counter');
 
     element.addEventListener('click', (e) => {
 
