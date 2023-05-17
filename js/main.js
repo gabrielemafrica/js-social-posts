@@ -100,7 +100,6 @@ container.innerHTML += post;
 });
 
 //bottone like
-
 const arrayButtonLike = document.getElementsByClassName('like-button');
 
 console.log(arrayButtonLike);
@@ -111,13 +110,20 @@ for (let i = 0; i < arrayButtonLike.length; i++) {
     const element = arrayButtonLike[i];
     console.log(element);
 
-    element.addEventListener('click', () => {
+/*
+    //strada 1
+    element.addEventListener('click', (e) => {
+
+        //prevengo compistamento di defoult
+        e.preventDefault();
 
         //seleziono il conta like
         const id = i + 1;
         const idCounter = 'like-counter-' + id;
         const counterLike = document.getElementById(idCounter);
         const counterLikeValue = parseInt(counterLike.textContent);
+        //potevo selezionarlo anche cosi
+        //const counterLikeValue2 = parseInt(counterLike.innerHTML);
 
         if (element.classList.contains('like-button--liked')) {
             //tolgo classe liked
@@ -134,8 +140,55 @@ for (let i = 0; i < arrayButtonLike.length; i++) {
             arrayPostLiked.push(id);
         }
 
-        console.log(arrayPostLiked);
+        console.log(arrayPostLiked); 
+        }
+    );
+*/
+
+    //strada 2
+
+    //prendo i counter
+    const arrayCounter = document.querySelectorAll('.js-likes-counter');
+
+    element.addEventListener('click', (e) => {
+
+        //prevengo compistamento di defoult
+        e.preventDefault();
+
+        //setto id
+        const id = i + 1;
+
+        //seleziono il conta like
+        let contatoreElemento = arrayCounter[i];
+        let contatore = parseInt(contatoreElemento.innerHTML);
       
-    })
-    
+        if (element.classList.contains('like-button--liked')) {
+
+            //tolgo classe liked
+            element.classList.remove('like-button--liked');
+
+            //aggiorno il contatore
+            contatore--;
+            contatoreElemento.innerHTML = contatore;
+
+            //tolgo al array
+            arrayPostLiked.splice(arrayPostLiked.indexOf(id), 1);            
+
+        }else{
+            //aggiungo classe liked
+            element.classList.add('like-button--liked');   
+            
+            //aggiorno il contatore
+            contatore++;
+            contatoreElemento.innerHTML = contatore;
+
+            //aggiungo al array
+            arrayPostLiked.push(id);
+        }
+
+        console.log(arrayPostLiked); 
+        }
+    );
+
+
 }
